@@ -114,6 +114,7 @@ window.onload = function() {
 	var oContainer = document.getElementById('bottom-positioner');
 	var oBtn = document.getElementById('button');
 	var oList = oContainer.getElementsByTagName('span')[0];
+	oBtn.state = 'unclicked';
 
 	for (var i = 0; i < aBubbles.length; i++) {
 		aBubbles[i].index = i;
@@ -164,36 +165,40 @@ window.onload = function() {
 			removeClass(oBar, 'enable');
 			addClass(oBar, 'disable');
 			oList.innerHTML = '';
+			oBtn.state = 'unclicked';
 		}
 	}
 
 	//执行机器人程序
 	oBtn.onclick = function() {
-		var randomList = [0, 1, 2, 3, 4];
+		if (oBtn.state == 'unclicked') {
+			oBtn.state = 'clicked';
+			var randomList = [0, 1, 2, 3, 4];
 
-		randomList.sort(function() {
-			return Math.random()-0.5;
-		});
+			randomList.sort(function() {
+				return Math.random()-0.5;
+			});
 
-		for (var i = 0; i < randomList.length; i++) {
-			switch(randomList[i]) {
-				case 0:
-					oList.innerHTML += 'A&nbsp';
-					break;
-				case 1:
-					oList.innerHTML += 'B&nbsp';
-					break;
-				case 2:
-					oList.innerHTML += 'C&nbsp';
-					break;
-				case 3:
-					oList.innerHTML += 'D&nbsp';
-					break;
-				case 4:
-				    oList.innerHTML += 'E&nbsp';
-					break;
+			for (var i = 0; i < randomList.length; i++) {
+				switch(randomList[i]) {
+					case 0:
+						oList.innerHTML += 'A&nbsp';
+						break;
+					case 1:
+						oList.innerHTML += 'B&nbsp';
+						break;
+					case 2:
+						oList.innerHTML += 'C&nbsp';
+						break;
+					case 3:
+						oList.innerHTML += 'D&nbsp';
+						break;
+					case 4:
+					    oList.innerHTML += 'E&nbsp';
+						break;
+				}
 			}
+			robot(randomList, 0, aBubbles);
 		}
-		robot(randomList, 0, aBubbles);
 	}
 }

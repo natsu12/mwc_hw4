@@ -126,6 +126,9 @@ window.onload = function() {
 				clickOnBubble(this, aBubbles);
 				var that = this;
 				ajax('http://localhost:3000', function(number) {
+					if (oBtn.reset) {
+						return;
+					}
 					showNumber(that, number);
 					changeState(aBubbles);
 					allNumbersGot(aBubbles);
@@ -162,6 +165,11 @@ window.onload = function() {
 			}
 			removeClass(oBar, 'enable');
 			addClass(oBar, 'disable'); 
+			oBtn.reset = true;
 		}
+	}
+
+	oBtn.onmouseover = function() {
+		oBtn.reset = false;
 	}
 }

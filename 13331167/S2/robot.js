@@ -4,6 +4,9 @@ function robot(index, aBubbles) {
 		clickOnBubble(aBubbles[index], aBubbles);
 		var that = aBubbles[index];
 		ajax('http://localhost:3000', function(number) {
+			if (that.state == 'unclicked') {
+				return;
+			}	
 			showNumber(that, number);
 			changeState(aBubbles);
 			allNumbersGot(aBubbles);

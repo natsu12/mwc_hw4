@@ -113,6 +113,7 @@ window.onload = function() {
 	var oBar = document.getElementById('info-bar');
 	var oContainer = document.getElementById('bottom-positioner');
 	var oBtn = document.getElementById('button');
+	oBtn.state = 'unclicked';
 
 	for (var i = 0; i < aBubbles.length; i++) {
 		aBubbles[i].index = i;
@@ -162,11 +163,15 @@ window.onload = function() {
 			}
 			removeClass(oBar, 'enable');
 			addClass(oBar, 'disable'); 
+			oBtn.state = 'unclicked';
 		}
 	}
 
 	//执行机器人程序
 	oBtn.onclick = function() {
-		robot(aBubbles);
+		if (oBtn.state == 'unclicked') {
+			oBtn.state = 'clicked';
+			robot(aBubbles);
+		}
 	}
 }
